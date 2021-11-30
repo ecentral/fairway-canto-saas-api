@@ -9,12 +9,12 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Ecentral\CantoSaasApiClient\Tests\Endpoint;
+namespace Fairway\CantoSaasApi\Tests\Endpoint;
 
-use Ecentral\CantoSaasApiClient\Client;
-use Ecentral\CantoSaasApiClient\ClientOptions;
-use Ecentral\CantoSaasApiClient\Endpoint\Asset;
-use Ecentral\CantoSaasApiClient\Http\Asset\BatchUpdatePropertiesRequest;
+use Fairway\CantoSaasApi\Client;
+use Fairway\CantoSaasApi\ClientOptions;
+use Fairway\CantoSaasApi\Endpoint\Asset;
+use Fairway\CantoSaasApi\Http\Asset\BatchUpdatePropertiesRequest;
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Handler\MockHandler;
@@ -72,7 +72,7 @@ class AssetTest extends TestCase
      */
     public function batchUpdatePropertiesExpectUnexpectedHttpStatusException(): void
     {
-        $this->expectExceptionCode(1626717610);
+        $this->expectExceptionCode(1627649307);
 
         $mockHandler = new MockHandler([
             new RequestException(

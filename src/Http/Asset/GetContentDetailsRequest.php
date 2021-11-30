@@ -9,11 +9,11 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Ecentral\CantoSaasApiClient\Http\Asset;
+namespace Fairway\CantoSaasApi\Http\Asset;
 
-use Ecentral\CantoSaasApiClient\Http\RequestInterface;
+use Fairway\CantoSaasApi\Http\Request;
 
-class GetContentDetailsRequest implements RequestInterface
+class GetContentDetailsRequest extends Request
 {
     protected string $scheme;
 
@@ -25,16 +25,21 @@ class GetContentDetailsRequest implements RequestInterface
         $this->scheme = $scheme;
     }
 
-    public function getQueryParams(): ?array
-    {
-        return null;
-    }
-
     public function getPathVariables(): ?array
     {
         return [
             $this->scheme,
             $this->contentId,
         ];
+    }
+
+    public function getApiPath(): string
+    {
+        return '';
+    }
+
+    public function getMethod(): string
+    {
+        return self::GET;
     }
 }

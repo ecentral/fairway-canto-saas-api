@@ -9,7 +9,7 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Ecentral\CantoSaasApiClient\Http;
+namespace Fairway\CantoSaasApi\Http;
 
 use Exception;
 

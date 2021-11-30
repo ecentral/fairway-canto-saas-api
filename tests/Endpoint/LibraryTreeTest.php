@@ -9,13 +9,13 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Ecentral\CantoSaasApiClient\Tests\Endpoint;
+namespace Fairway\CantoSaasApi\Tests\Endpoint;
 
-use Ecentral\CantoSaasApiClient\Client;
-use Ecentral\CantoSaasApiClient\ClientOptions;
-use Ecentral\CantoSaasApiClient\Endpoint\LibraryTree;
-use Ecentral\CantoSaasApiClient\Http\LibraryTree\GetTreeRequest;
-use Ecentral\CantoSaasApiClient\Http\LibraryTree\SearchFolderRequest;
+use Fairway\CantoSaasApi\Client;
+use Fairway\CantoSaasApi\ClientOptions;
+use Fairway\CantoSaasApi\Endpoint\LibraryTree;
+use Fairway\CantoSaasApi\Http\LibraryTree\GetTreeRequest;
+use Fairway\CantoSaasApi\Http\LibraryTree\SearchFolderRequest;
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Handler\MockHandler;
@@ -88,7 +88,7 @@ class LibraryTreeTest extends TestCase
      */
     public function searchFolderContentExpectUnexpectedHttpStatusException(): void
     {
-        $this->expectExceptionCode(1626717610);
+        $this->expectExceptionCode(1627649307);
 
         $mockHandler = new MockHandler([
             new RequestException(
@@ -148,7 +148,7 @@ class LibraryTreeTest extends TestCase
      */
     public function getTreeExpectUnexpectedHttpStatusException(): void
     {
-        $this->expectExceptionCode(1626717610);
+        $this->expectExceptionCode(1627649307);
 
         $mockHandler = new MockHandler([new Response(400, [], '[]')]);
         $clientMock = $this->buildClientMock($mockHandler);

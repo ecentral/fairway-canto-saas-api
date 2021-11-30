@@ -9,12 +9,12 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Ecentral\CantoSaasApiClient\Endpoint\Authorization;
+namespace Fairway\CantoSaasApi\Endpoint\Authorization;
 
-use Ecentral\CantoSaasApiClient\Endpoint\AbstractEndpoint;
-use Ecentral\CantoSaasApiClient\Http\Authorization\OAuth2Request;
-use Ecentral\CantoSaasApiClient\Http\Authorization\OAuth2Response;
-use Ecentral\CantoSaasApiClient\Http\RequestInterface;
+use Fairway\CantoSaasApi\Endpoint\AbstractEndpoint;
+use Fairway\CantoSaasApi\Http\Authorization\OAuth2Request;
+use Fairway\CantoSaasApi\Http\Authorization\OAuth2Response;
+use Fairway\CantoSaasApi\Http\RequestInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Uri;
@@ -23,14 +23,12 @@ final class OAuth2 extends AbstractEndpoint
 {
     /**
      * @throws AuthorizationFailedException
+     * @throws NotAuthorizedException
      */
     public function obtainAccessToken(OAuth2Request $request): OAuth2Response
     {
-        $uri = $this->buildRequestUrl(
-            'token',
-            $request
-        );
-        $httpRequest = new Request('POST', $uri);
+        $uri = $this->buildRequestUrl($request);
+        $httpRequest = new Request($request->getMethod(), $uri);
 
         try {
             $response = $this->sendRequest($httpRequest);
@@ -45,12 +43,12 @@ final class OAuth2 extends AbstractEndpoint
         return new OAuth2Response($response);
     }
 
-    protected function buildRequestUrl(string $path, RequestInterface $request): Uri
+    protected function buildRequestUrl(RequestInterface $request): Uri
     {
         $url = sprintf(
             'https://oauth.%s/oauth/api/oauth2/%s',
             $this->getClient()->getOptions()->getCantoDomain(),
-            urlencode(trim($path, '/'))
+            urlencode(trim($request->getApiPath(), '/'))
         );
 
         $queryParams = $request->getQueryParams();

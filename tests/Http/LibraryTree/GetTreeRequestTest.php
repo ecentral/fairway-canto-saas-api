@@ -9,9 +9,9 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Ecentral\CantoSaasApiClient\Tests\Http\LibraryTree;
+namespace Fairway\CantoSaasApi\Tests\Http\LibraryTree;
 
-use Ecentral\CantoSaasApiClient\Http\LibraryTree\GetTreeRequest;
+use Fairway\CantoSaasApi\Http\LibraryTree\GetTreeRequest;
 use PHPUnit\Framework\TestCase;
 
 class GetTreeRequestTest extends TestCase

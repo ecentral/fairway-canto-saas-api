@@ -9,9 +9,9 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Ecentral\CantoSaasApiClient\Tests\Http\Authorization;
+namespace Fairway\CantoSaasApi\Tests\Http\Authorization;
 
-use Ecentral\CantoSaasApiClient\Http\Authorization\OAuth2Response;
+use Fairway\CantoSaasApi\Http\Authorization\OAuth2Response;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 

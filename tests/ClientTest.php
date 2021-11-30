@@ -9,10 +9,10 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Ecentral\CantoSaasApiClient\Tests;
+namespace Fairway\CantoSaasApi\Tests;
 
-use Ecentral\CantoSaasApiClient\Client;
-use Ecentral\CantoSaasApiClient\ClientOptions;
+use Fairway\CantoSaasApi\Client;
+use Fairway\CantoSaasApi\ClientOptions;
 use GuzzleHttp\ClientInterface;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;

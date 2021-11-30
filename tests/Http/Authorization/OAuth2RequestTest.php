@@ -9,9 +9,9 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Ecentral\CantoSaasApiClient\Tests\Http\Authorization;
+namespace Fairway\CantoSaasApi\Tests\Http\Authorization;
 
-use Ecentral\CantoSaasApiClient\Http\Authorization\OAuth2Request;
+use Fairway\CantoSaasApi\Http\Authorization\OAuth2Request;
 use PHPUnit\Framework\TestCase;
 
 class OAuth2RequestTest extends TestCase

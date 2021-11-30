@@ -9,12 +9,12 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Ecentral\CantoSaasApiClient\Tests\Endpoint\Authorization;
+namespace Fairway\CantoSaasApi\Tests\Endpoint\Authorization;
 
-use Ecentral\CantoSaasApiClient\Client;
-use Ecentral\CantoSaasApiClient\ClientOptions;
-use Ecentral\CantoSaasApiClient\Endpoint\Authorization\OAuth2;
-use Ecentral\CantoSaasApiClient\Http\Authorization\OAuth2Request;
+use Fairway\CantoSaasApi\Client;
+use Fairway\CantoSaasApi\ClientOptions;
+use Fairway\CantoSaasApi\Endpoint\Authorization\OAuth2;
+use Fairway\CantoSaasApi\Http\Authorization\OAuth2Request;
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Handler\MockHandler;

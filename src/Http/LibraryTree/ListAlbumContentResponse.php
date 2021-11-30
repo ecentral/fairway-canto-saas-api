@@ -9,10 +9,10 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Ecentral\CantoSaasApiClient\Http\LibraryTree;
+namespace Fairway\CantoSaasApi\Http\LibraryTree;
 
-use Ecentral\CantoSaasApiClient\Http\InvalidResponseException;
-use Ecentral\CantoSaasApiClient\Http\Response;
+use Fairway\CantoSaasApi\Http\InvalidResponseException;
+use Fairway\CantoSaasApi\Http\Response;
 use Psr\Http\Message\ResponseInterface;
 
 class ListAlbumContentResponse extends Response

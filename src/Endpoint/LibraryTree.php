@@ -9,20 +9,21 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Ecentral\CantoSaasApiClient\Endpoint;
+namespace Fairway\CantoSaasApi\Endpoint;
 
-use Ecentral\CantoSaasApiClient\Endpoint\Authorization\NotAuthorizedException;
-use Ecentral\CantoSaasApiClient\Http\InvalidResponseException;
-use Ecentral\CantoSaasApiClient\Http\LibraryTree\GetDetailsRequest;
-use Ecentral\CantoSaasApiClient\Http\LibraryTree\GetDetailsResponse;
-use Ecentral\CantoSaasApiClient\Http\LibraryTree\GetTreeRequest;
-use Ecentral\CantoSaasApiClient\Http\LibraryTree\GetTreeResponse;
-use Ecentral\CantoSaasApiClient\Http\LibraryTree\ListAlbumContentRequest;
-use Ecentral\CantoSaasApiClient\Http\LibraryTree\ListAlbumContentResponse;
-use Ecentral\CantoSaasApiClient\Http\LibraryTree\SearchFolderRequest;
-use Ecentral\CantoSaasApiClient\Http\LibraryTree\SearchFolderResponse;
-use GuzzleHttp\Exception\GuzzleException;
-use GuzzleHttp\Psr7\Request;
+use Fairway\CantoSaasApi\Endpoint\Authorization\NotAuthorizedException;
+use Fairway\CantoSaasApi\Http\InvalidResponseException;
+use Fairway\CantoSaasApi\Http\LibraryTree\CreateAlbumFolderRequest;
+use Fairway\CantoSaasApi\Http\LibraryTree\CreateAlbumFolderResponse;
+use Fairway\CantoSaasApi\Http\LibraryTree\GetDetailsRequest;
+use Fairway\CantoSaasApi\Http\LibraryTree\GetDetailsResponse;
+use Fairway\CantoSaasApi\Http\LibraryTree\GetMyCollectionDetailInfoRequest;
+use Fairway\CantoSaasApi\Http\LibraryTree\GetTreeRequest;
+use Fairway\CantoSaasApi\Http\LibraryTree\GetTreeResponse;
+use Fairway\CantoSaasApi\Http\LibraryTree\ListAlbumContentRequest;
+use Fairway\CantoSaasApi\Http\LibraryTree\ListAlbumContentResponse;
+use Fairway\CantoSaasApi\Http\LibraryTree\SearchFolderRequest;
+use Fairway\CantoSaasApi\Http\LibraryTree\SearchFolderResponse;
 
 final class LibraryTree extends AbstractEndpoint
 {
@@ -32,22 +33,7 @@ final class LibraryTree extends AbstractEndpoint
      */
     public function searchFolderContent(SearchFolderRequest $request): SearchFolderResponse
     {
-        $uri = $this->buildRequestUrl('folder', $request);
-        $httpRequest = new Request('GET', $uri);
-
-        try {
-            $response = $this->sendRequest($httpRequest);
-        } catch (GuzzleException $e) {
-            throw new InvalidResponseException(
-                sprintf(
-                    'Invalid http status code received. Expected 200, got %s.',
-                    $e->getCode()
-                ),
-                1626717610,
-                $e
-            );
-        }
-
+        $response = $this->getResponse($request);
         return new SearchFolderResponse($response);
     }
 
@@ -57,22 +43,7 @@ final class LibraryTree extends AbstractEndpoint
      */
     public function listAlbumContent(ListAlbumContentRequest $request): ListAlbumContentResponse
     {
-        $uri = $this->buildRequestUrl('album', $request);
-        $httpRequest = new Request('GET', $uri);
-
-        try {
-            $response = $this->sendRequest($httpRequest);
-        } catch (GuzzleException $e) {
-            throw new InvalidResponseException(
-                sprintf(
-                    'Invalid http status code received. Expected 200, got %s.',
-                    $e->getCode()
-                ),
-                1626717610,
-                $e
-            );
-        }
-
+        $response = $this->getResponse($request);
         return new ListAlbumContentResponse($response);
     }
 
@@ -82,22 +53,7 @@ final class LibraryTree extends AbstractEndpoint
      */
     public function getTree(GetTreeRequest $request): GetTreeResponse
     {
-        $uri = $this->buildRequestUrl('tree', $request);
-        $httpRequest = new Request('GET', $uri);
-
-        try {
-            $response = $this->sendRequest($httpRequest);
-        } catch (GuzzleException $e) {
-            throw new InvalidResponseException(
-                sprintf(
-                    'Invalid http status code received. Expected 200, got %s.',
-                    $e->getCode()
-                ),
-                1626717610,
-                $e
-            );
-        }
-
+        $response = $this->getResponse($request);
         return new GetTreeResponse($response);
     }
 
@@ -107,26 +63,41 @@ final class LibraryTree extends AbstractEndpoint
      */
     public function getDetails(GetDetailsRequest $request): GetDetailsResponse
     {
-        if ($request->getType() === GetDetailsRequest::TYPE_FOLDER) {
-            $uri = $this->buildRequestUrl('info/folder', $request);
-        } else {
-            $uri = $this->buildRequestUrl('info/album', $request);
-        }
-        $httpRequest = new Request('GET', $uri);
-
-        try {
-            $response = $this->sendRequest($httpRequest);
-        } catch (GuzzleException $e) {
-            throw new InvalidResponseException(
-                sprintf(
-                    'Invalid http status code received. Expected 200, got %s.',
-                    $e->getCode()
-                ),
-                1626717610,
-                $e
-            );
-        }
-
+        $response = $this->getResponse($request);
         return new GetDetailsResponse($response);
+    }
+
+    /**
+     * @throws InvalidResponseException
+     * @throws NotAuthorizedException
+     */
+    public function createFolder(CreateAlbumFolderRequest $request): CreateAlbumFolderResponse
+    {
+        $response = $this->getResponse($request);
+        return new CreateAlbumFolderResponse($response);
+    }
+
+    /**
+     * @throws InvalidResponseException
+     * @throws NotAuthorizedException
+     */
+    public function getMyCollectionDetailInfo(GetMyCollectionDetailInfoRequest $request): SearchFolderResponse
+    {
+        $response = $this->getResponse($request);
+        return new SearchFolderResponse($response);
+    }
+
+    /**
+     * @throws InvalidResponseException
+     * @throws NotAuthorizedException
+     */
+    public function createAlbum(CreateAlbumFolderRequest $request): CreateAlbumFolderResponse
+    {
+        $response = $this->getResponse($request);
+        return new CreateAlbumFolderResponse($response);
+    }
+
+    public function deleteFolderOrAlbum()
+    {
     }
 }

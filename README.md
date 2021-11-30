@@ -3,9 +3,9 @@
 ## Example usage
 
 ```php
-use Ecentral\CantoSaasApiClient\ClientOptions;
-use Ecentral\CantoSaasApiClient\Client;
-use Ecentral\CantoSaasApiClient\Http\LibraryTree\GetTreeRequest;
+use Fairway\CantoSaasApi\ClientOptions;
+use Fairway\CantoSaasApi\Client;
+use Fairway\CantoSaasApi\Http\LibraryTree\GetTreeRequest;
 
 $clientOptions = new ClientOptions([
     'cantoName' => 'my-canto-name',

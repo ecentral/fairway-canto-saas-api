@@ -9,11 +9,11 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Ecentral\CantoSaasApiClient\Http\LibraryTree;
+namespace Fairway\CantoSaasApi\Http\LibraryTree;
 
-use Ecentral\CantoSaasApiClient\Http\RequestInterface;
+use Fairway\CantoSaasApi\Http\Request;
 
-class GetDetailsRequest implements RequestInterface
+class GetDetailsRequest extends Request
 {
     public const TYPE_FOLDER = 'folder';
     public const TYPE_ALBUM = 'album';
@@ -43,5 +43,15 @@ class GetDetailsRequest implements RequestInterface
         return [
             $this->folderId,
         ];
+    }
+
+    public function getApiPath(): string
+    {
+        return $this->getType() === self::TYPE_FOLDER ? 'info/folder': 'info/album';
+    }
+
+    public function getMethod(): string
+    {
+        return self::GET;
     }
 }

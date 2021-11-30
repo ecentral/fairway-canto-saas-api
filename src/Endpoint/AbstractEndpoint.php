@@ -9,12 +9,13 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Ecentral\CantoSaasApiClient\Endpoint;
+namespace Fairway\CantoSaasApi\Endpoint;
 
-use Ecentral\CantoSaasApiClient\Client;
-use Ecentral\CantoSaasApiClient\Endpoint\Authorization\NotAuthorizedException;
+use Fairway\CantoSaasApi\Client;
+use Fairway\CantoSaasApi\Endpoint\Authorization\NotAuthorizedException;
+use Fairway\CantoSaasApi\Http\InvalidResponseException;
+use Fairway\CantoSaasApi\Http\RequestInterface as CantoRequestInterface;
 use GuzzleHttp\Exception\GuzzleException;
-use GuzzleHttp\Psr7\Uri;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -33,28 +34,6 @@ abstract class AbstractEndpoint
     protected function getClient(): Client
     {
         return $this->client;
-    }
-
-    protected function buildRequestUrl(string $path, \Ecentral\CantoSaasApiClient\Http\RequestInterface $request): Uri
-    {
-        $url = sprintf(
-            'https://%s.%s/api/v1/%s',
-            $this->client->getOptions()->getCantoName(),
-            $this->client->getOptions()->getCantoDomain(),
-            trim($path, '/')
-        );
-
-        $pathVariables = $request->getPathVariables();
-        $queryParams = $request->getQueryParams();
-        if (is_array($pathVariables) === true) {
-            $url = rtrim($url, '/');
-            $url .= '/' . implode('/', $pathVariables);
-        }
-        if (is_array($queryParams) && count($queryParams) > 0) {
-            $url .= '?' . http_build_query($queryParams);
-        }
-
-        return new Uri($url);
     }
 
     /**
@@ -88,5 +67,35 @@ abstract class AbstractEndpoint
         }
 
         return $response;
+    }
+
+    /**
+     * @throws InvalidResponseException
+     * @throws Authorization\NotAuthorizedException
+     */
+    protected function getResponse(CantoRequestInterface $request): ResponseInterface
+    {
+        $httpRequest = $request->toHttpRequest($this->getClient());
+        return $this->getResponseWithHttpRequest($httpRequest);
+    }
+
+    /**
+     * @throws InvalidResponseException
+     * @throws NotAuthorizedException
+     */
+    protected function getResponseWithHttpRequest(RequestInterface $request): ResponseInterface
+    {
+        try {
+            return $this->sendRequest($request);
+        } catch (GuzzleException $e) {
+            throw new InvalidResponseException(
+                sprintf(
+                    'Invalid http status code received. Expected 200, got %s.',
+                    $e->getCode()
+                ),
+                1627649307,
+                $e
+            );
+        }
     }
 }

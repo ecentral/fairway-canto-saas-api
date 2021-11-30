@@ -9,12 +9,11 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Ecentral\CantoSaasApiClient\Http\Asset;
+namespace Fairway\CantoSaasApi\Http\Asset;
 
-use Ecentral\CantoSaasApiClient\Http\InvalidRequestException;
-use Ecentral\CantoSaasApiClient\Http\RequestInterface;
+use Fairway\CantoSaasApi\Http\Request;
 
-class BatchUpdatePropertiesRequest implements RequestInterface
+class BatchUpdatePropertiesRequest extends Request
 {
     protected array $assets = [];
 
@@ -40,34 +39,26 @@ class BatchUpdatePropertiesRequest implements RequestInterface
         return $this;
     }
 
-    public function getQueryParams(): ?array
+    public function jsonSerialize(): array
     {
-        return null;
-    }
-
-    public function getPathVariables(): ?array
-    {
-        return null;
-    }
-
-    /**
-     * @throws InvalidRequestException
-     */
-    public function getBody(): string
-    {
-        $bodyData = [
+        return [
             'contents' => $this->assets,
             'properties' => $this->properties,
         ];
+    }
 
-        try {
-            return \json_encode($bodyData, JSON_THROW_ON_ERROR);
-        } catch (\JsonException $e) {
-            throw new InvalidRequestException(
-                'Can not generate json http body.',
-                1626885024,
-                $e
-            );
-        }
+    public function getApiPath(): string
+    {
+        return 'batch/edit';
+    }
+
+    public function getMethod(): string
+    {
+        return self::PUT;
+    }
+
+    protected function hasBody(): bool
+    {
+        return true;
     }
 }

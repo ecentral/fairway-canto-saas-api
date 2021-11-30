@@ -9,11 +9,11 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Ecentral\CantoSaasApiClient\Http\Authorization;
+namespace Fairway\CantoSaasApi\Http\Authorization;
 
-use Ecentral\CantoSaasApiClient\Http\RequestInterface;
+use Fairway\CantoSaasApi\Http\Request;
 
-class OAuth2Request implements RequestInterface
+class OAuth2Request extends Request
 {
     public const GRANT_TYPE_AUTHORIZATION_CODE = 'authorization_code';
     public const GRANT_TYPE_CLIENT_CREDENTIALS = 'client_credentials';
@@ -106,8 +106,13 @@ class OAuth2Request implements RequestInterface
         ];
     }
 
-    public function getPathVariables(): ?array
+    public function getApiPath(): string
     {
-        return null;
+        return 'token';
+    }
+
+    public function getMethod(): string
+    {
+        return self::POST;
     }
 }

@@ -29,12 +29,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Ecentral\\CantoSaasApiClient\\": "src"
+      "Fairway\\CantoSaasApi\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Ecentral\\CantoSaasApiClient\\Tests\\": "tests"
+      "Fairway\\CantoSaasApi\\Tests\\": "tests"
     }
   }
 }

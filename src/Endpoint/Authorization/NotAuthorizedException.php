@@ -9,7 +9,7 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Ecentral\CantoSaasApiClient\Endpoint\Authorization;
+namespace Fairway\CantoSaasApi\Endpoint\Authorization;
 
 use Exception;
 use Psr\Http\Message\ResponseInterface;

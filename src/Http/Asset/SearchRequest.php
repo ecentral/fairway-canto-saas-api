@@ -9,11 +9,11 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Ecentral\CantoSaasApiClient\Http\Asset;
+namespace Fairway\CantoSaasApi\Http\Asset;
 
-use Ecentral\CantoSaasApiClient\Http\RequestInterface;
+use Fairway\CantoSaasApi\Http\Request;
 
-class SearchRequest implements RequestInterface
+class SearchRequest extends Request
 {
     public const APPROVAL_APPROVED = 'approved';
     public const APPROVAL_PENDING = 'pending';
@@ -310,8 +310,13 @@ class SearchRequest implements RequestInterface
         ];
     }
 
-    public function getPathVariables(): ?array
+    public function getApiPath(): string
     {
-        return null;
+        return 'search';
+    }
+
+    public function getMethod(): string
+    {
+        return self::GET;
     }
 }

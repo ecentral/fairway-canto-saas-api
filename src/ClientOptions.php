@@ -9,7 +9,7 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Ecentral\CantoSaasApiClient;
+namespace Fairway\CantoSaasApi;
 
 use GuzzleHttp\ClientInterface;
 use InvalidArgumentException;
@@ -27,6 +27,9 @@ class ClientOptions
         'appId' => 'string',
         'appSecret' => 'string',
         'redirectUri' => 'string',
+        'mdcDomainName' => 'string',
+        'mdcAwsAccountId' => 'string',
+        'masterImageSize' => 'int',
         'httpClient' => ClientInterface::class,
         'httpClientOptions' => [
             'debug' => 'bool',
@@ -45,6 +48,12 @@ class ClientOptions
     private string $appSecret;
 
     private string $redirectUri;
+
+    private string $mdcDomainName;
+
+    private string $mdcAwsAccountId;
+
+    private int $masterImageSize;
 
     private ?ClientInterface $httpClient;
 
@@ -75,6 +84,9 @@ class ClientOptions
             $options['httpClientOptions'] ?? []
         );
         $this->logger = $options['logger'] ?? null;
+        $this->mdcAwsAccountId = $options['mdcAwsAccountId'] ?? '';
+        $this->mdcDomainName = $options['mdcDomainName'] ?? '';
+        $this->masterImageSize = $options['masterImageSize'] ?? 2048;
     }
 
     public function getCantoName(): string
@@ -110,6 +122,21 @@ class ClientOptions
     public function getHttpClientOptions(): array
     {
         return $this->httpClientOptions;
+    }
+
+    public function getMdcDomainName(): string
+    {
+        return $this->mdcDomainName;
+    }
+
+    public function getMdcAwsAccountId(): string
+    {
+        return $this->mdcAwsAccountId;
+    }
+
+    public function getMasterImageSize(): int
+    {
+        return $this->masterImageSize;
     }
 
     public function getLogger(): ?LoggerInterface

@@ -9,22 +9,22 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Ecentral\CantoSaasApiClient\Http\Authorization;
+namespace Fairway\CantoSaasApi\Http\Authorization;
 
-use Ecentral\CantoSaasApiClient\Endpoint\Authorization\AuthorizationFailedException;
-use Ecentral\CantoSaasApiClient\Http\InvalidResponseException;
-use Ecentral\CantoSaasApiClient\Http\Response;
+use Fairway\CantoSaasApi\Endpoint\Authorization\AuthorizationFailedException;
+use Fairway\CantoSaasApi\Http\InvalidResponseException;
+use Fairway\CantoSaasApi\Http\Response;
 use Psr\Http\Message\ResponseInterface;
 
 class OAuth2Response extends Response
 {
-    private string $accessToken = '';
+    private string $accessToken;
 
-    private int $expiresIn = 0;
+    private int $expiresIn;
 
-    private string $tokenType = '';
+    private string $tokenType;
 
-    private ?string $refreshToken = null;
+    private ?string $refreshToken;
 
     /**
      * @throws AuthorizationFailedException
@@ -41,10 +41,10 @@ class OAuth2Response extends Response
             );
         }
 
-        $this->accessToken = $json['accessToken'];
-        $this->expiresIn = (int)$json['expiresIn'];
-        $this->tokenType = $json['tokenType'];
-        $this->refreshToken = $json['refreshToken'];
+        $this->accessToken = $json['accessToken'] ?? '';
+        $this->expiresIn = (int)($json['expiresIn'] ?? 0);
+        $this->tokenType = $json['tokenType'] ?? '';
+        $this->refreshToken = $json['refreshToken'] ?? null;
     }
 
     public function getAccessToken(): string

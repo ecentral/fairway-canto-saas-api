@@ -9,9 +9,9 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Ecentral\CantoSaasApiClient\Tests\Http\LibraryTree;
+namespace Fairway\CantoSaasApi\Tests\Http\LibraryTree;
 
-use Ecentral\CantoSaasApiClient\Http\LibraryTree\SearchFolderRequest;
+use Fairway\CantoSaasApi\Http\LibraryTree\SearchFolderRequest;
 use PHPUnit\Framework\TestCase;
 
 class SearchFolderRequestTest extends TestCase

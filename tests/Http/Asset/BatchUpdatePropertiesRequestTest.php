@@ -9,9 +9,9 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Ecentral\CantoSaasApiClient\Tests\Http\Asset;
+namespace Fairway\CantoSaasApi\Tests\Http\Asset;
 
-use Ecentral\CantoSaasApiClient\Http\Asset\BatchUpdatePropertiesRequest;
+use Fairway\CantoSaasApi\Http\Asset\BatchUpdatePropertiesRequest;
 use PHPUnit\Framework\TestCase;
 
 class BatchUpdatePropertiesRequestTest extends TestCase

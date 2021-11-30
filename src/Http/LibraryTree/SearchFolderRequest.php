@@ -9,11 +9,11 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Ecentral\CantoSaasApiClient\Http\LibraryTree;
+namespace Fairway\CantoSaasApi\Http\LibraryTree;
 
-use Ecentral\CantoSaasApiClient\Http\RequestInterface;
+use Fairway\CantoSaasApi\Http\Request;
 
-class SearchFolderRequest implements RequestInterface
+class SearchFolderRequest extends Request
 {
     public const SORT_DIRECTION_ASC = 'ascending';
     public const SORT_DIRECTION_DESC = 'descending';
@@ -270,5 +270,15 @@ class SearchFolderRequest implements RequestInterface
         return [
             $this->folderId,
         ];
+    }
+
+    public function getApiPath(): string
+    {
+        return 'folder';
+    }
+
+    public function getMethod(): string
+    {
+        return self::GET;
     }
 }

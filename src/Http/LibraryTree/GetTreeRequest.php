@@ -9,11 +9,11 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Ecentral\CantoSaasApiClient\Http\LibraryTree;
+namespace Fairway\CantoSaasApi\Http\LibraryTree;
 
-use Ecentral\CantoSaasApiClient\Http\RequestInterface;
+use Fairway\CantoSaasApi\Http\Request;
 
-class GetTreeRequest implements RequestInterface
+class GetTreeRequest extends Request
 {
     public const SORT_DIRECTION_ASC = 'ascending';
     public const SORT_DIRECTION_DESC = 'descending';
@@ -77,5 +77,15 @@ class GetTreeRequest implements RequestInterface
             ];
         }
         return null;
+    }
+
+    public function getApiPath(): string
+    {
+        return 'tree';
+    }
+
+    public function getMethod(): string
+    {
+        return self::GET;
     }
 }

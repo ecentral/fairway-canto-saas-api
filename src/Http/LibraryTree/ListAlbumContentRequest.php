@@ -9,11 +9,11 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Ecentral\CantoSaasApiClient\Http\LibraryTree;
+namespace Fairway\CantoSaasApi\Http\LibraryTree;
 
-use Ecentral\CantoSaasApiClient\Http\RequestInterface;
+use Fairway\CantoSaasApi\Http\Request;
 
-class ListAlbumContentRequest implements RequestInterface
+class ListAlbumContentRequest extends Request
 {
     public const SORT_DIRECTION_ASC = 'ascending';
     public const SORT_DIRECTION_DESC = 'descending';
@@ -83,5 +83,15 @@ class ListAlbumContentRequest implements RequestInterface
         return [
             $this->albumId,
         ];
+    }
+
+    public function getApiPath(): string
+    {
+        return 'album';
+    }
+
+    public function getMethod(): string
+    {
+        return self::GET;
     }
 }

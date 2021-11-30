@@ -9,9 +9,9 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Ecentral\CantoSaasApiClient\Http\Asset;
+namespace Fairway\CantoSaasApi\Http\Asset;
 
-use Ecentral\CantoSaasApiClient\Http\Response;
+use Fairway\CantoSaasApi\Http\Response;
 use Psr\Http\Message\ResponseInterface;
 
 class GetContentDetailsResponse extends Response

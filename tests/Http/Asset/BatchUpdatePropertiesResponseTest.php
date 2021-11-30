@@ -9,9 +9,9 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Ecentral\CantoSaasApiClient\Tests\Http\Asset;
+namespace Fairway\CantoSaasApi\Tests\Http\Asset;
 
-use Ecentral\CantoSaasApiClient\Http\Asset\BatchUpdatePropertiesResponse;
+use Fairway\CantoSaasApi\Http\Asset\BatchUpdatePropertiesResponse;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 
