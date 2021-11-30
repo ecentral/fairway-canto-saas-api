@@ -1,5 +1,5 @@
 {
-  "name": "ecentral/canto-saas-api-client",
+  "name": "fairway/canto-saas-api",
   "type": "library",
   "description": "Client library for Canto SaaS APIs.",
   "homepage": "https://gitlab.ecentral.de/canto-saas/ext-canto-saas-fal",
@@ -13,6 +13,11 @@
       "name": "Tim Schreiner",
       "role": "Developer",
       "email": "tim.schreiner@km2.de"
+    },
+    {
+      "name": "Christian Rodriguez Benthake",
+      "role": "Developer",
+      "email": "c.rodriguez.benthake@ecentral.de"
     }
   ],
   "require": {
