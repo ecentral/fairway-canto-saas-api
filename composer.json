@@ -3,7 +3,7 @@
   "type": "library",
   "description": "Client library for Canto SaaS APIs.",
   "homepage": "https://gitlab.ecentral.de/canto-saas/ext-canto-saas-fal",
-  "license": "GPL-2.0-or-later",
+  "license": "MIT",
   "keywords": [
     "Canto",
     "API"
