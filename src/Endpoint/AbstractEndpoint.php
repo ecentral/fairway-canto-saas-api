@@ -18,6 +18,7 @@ use Fairway\CantoSaasApi\Http\RequestInterface as CantoRequestInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use RuntimeException;
 
 /**
  * @internal
@@ -38,7 +39,7 @@ abstract class AbstractEndpoint
 
     /**
      * @throws NotAuthorizedException
-     * @throws GuzzleException
+     * @throws RuntimeException
      */
     protected function sendRequest(RequestInterface $request): ResponseInterface
     {
@@ -48,11 +49,12 @@ abstract class AbstractEndpoint
                 'Authorization',
                 'Bearer ' . $accessToken
             );
+            assert($request instanceof RequestInterface);
         }
 
         try {
             $response = $this->client->getHttpClient()->send($request);
-        } catch (GuzzleException $e) {
+        } catch (RuntimeException $e) {
             /*
              * API seems to respond with 404 when no authentication token is given but needed.
              * When token is given but invalid, API responds with 401.

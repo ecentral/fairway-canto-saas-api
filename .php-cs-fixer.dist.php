@@ -11,7 +11,7 @@ $config->setRiskyAllowed(true);
 $config->getFinder()->in(__DIR__);
 $config->setRules([
     '@DoctrineAnnotation' => true,
-    '@PSR2' => true,
+    '@PSR12' => true,
     'array_syntax' => ['syntax' => 'short'],
     'blank_line_after_opening_tag' => true,
     'braces' => ['allow_single_line_closure' => true],

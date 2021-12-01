@@ -47,7 +47,7 @@ class GetDetailsRequest extends Request
 
     public function getApiPath(): string
     {
-        return $this->getType() === self::TYPE_FOLDER ? 'info/folder': 'info/album';
+        return $this->getType() === self::TYPE_FOLDER ? 'info/folder' : 'info/album';
     }
 
     public function getMethod(): string

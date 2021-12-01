@@ -2,7 +2,7 @@
   "name": "fairway/canto-saas-api",
   "type": "library",
   "description": "Client library for Canto SaaS APIs.",
-  "homepage": "https://gitlab.ecentral.de/canto-saas/ext-canto-saas-fal",
+  "homepage": "https://github.com/ecentral/fairway-canto-saas-api/",
   "license": "MIT",
   "keywords": [
     "Canto",

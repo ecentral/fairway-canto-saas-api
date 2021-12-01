@@ -13,7 +13,6 @@ namespace Fairway\CantoSaasApi\Http;
 
 use Fairway\CantoSaasApi\Client;
 use GuzzleHttp\Psr7\Request as HttpRequest;
-use GuzzleHttp\Psr7\Utils;
 
 abstract class UploadRequest implements RequestInterface
 {
@@ -38,7 +37,14 @@ abstract class UploadRequest implements RequestInterface
     public function toHttpRequest(Client $client, array $withHeaders = []): HttpRequest
     {
         $formData = $this->getFormData();
-        $formData['contents'] = Utils::tryFopen($this->uploadedFilePath(), 'r');
+        if (class_exists(\GuzzleHttp\Psr7\Utils::class) && method_exists(\GuzzleHttp\Psr7\Utils::class, 'tryFopen')) {
+            $formData['contents'] = \GuzzleHttp\Psr7\Utils::tryFopen($this->uploadedFilePath(), 'r');
+        } elseif (function_exists('\GuzzleHttp\Psr7\try_fopen')) {
+            // Backward compatibility for guzzlehttp/psr7 < 1.8
+            $formData['contents'] = \GuzzleHttp\Psr7\try_fopen($this->uploadedFilePath(), 'r');
+        } else {
+            throw new \Exception('Could not open file');
+        }
         $formData['file'] = $formData['contents'];
         return new HttpRequest(
             $this->getMethod(),
