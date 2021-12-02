@@ -20,6 +20,8 @@ use Fairway\CantoSaasApi\Http\Asset\BatchGetContentDetailsRequest;
 use Fairway\CantoSaasApi\Http\Asset\BatchGetContentDetailsResponse;
 use Fairway\CantoSaasApi\Http\Asset\BatchUpdatePropertiesRequest;
 use Fairway\CantoSaasApi\Http\Asset\BatchUpdatePropertiesResponse;
+use Fairway\CantoSaasApi\Http\Asset\CreateShareLinksRequest;
+use Fairway\CantoSaasApi\Http\Asset\CreateShareLinksResponse;
 use Fairway\CantoSaasApi\Http\Asset\GetContentDetailsRequest;
 use Fairway\CantoSaasApi\Http\Asset\GetContentDetailsResponse;
 use Fairway\CantoSaasApi\Http\Asset\ListSpecificSchemeRequest;
@@ -211,5 +213,15 @@ final class Asset extends AbstractEndpoint
         $tempFileWriteStream = fopen($destinationPath, 'wb');
         stream_copy_to_stream($fileContentReadStream, $tempFileWriteStream);
         fclose($tempFileWriteStream);
+    }
+
+    /**
+     * @throws InvalidResponseException
+     * @throws Authorization\NotAuthorizedException
+     */
+    public function createShareLinks(CreateShareLinksRequest $request): CreateShareLinksResponse
+    {
+        $response = $this->getResponse($request);
+        return new CreateShareLinksResponse($response);
     }
 }
