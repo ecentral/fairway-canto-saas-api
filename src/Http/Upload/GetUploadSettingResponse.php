@@ -28,11 +28,13 @@ final class GetUploadSettingResponse extends Response
     private string $xAmzMetaFileName;
     private string $url;
     private string $key;
-
     private bool $isDeEnvironment;
+
     private ?string $xAmzDate = null;
     private ?string $xAmzAlgorithm = null;
     private ?string $xAmzCredential = null;
+    private ?string $xAmzSignature;
+    private $data = [];
 
     /**
      * @param ResponseInterface $response
@@ -41,25 +43,26 @@ final class GetUploadSettingResponse extends Response
      */
     public function __construct(ResponseInterface $response, bool $isDeEnvironment = false)
     {
-        $data = $this->parseResponse($response);
-        $this->policy = $data['Policy'] ?? '';
-        $this->xAmzMetaScheme = $data['x-amz-meta-scheme'] ?? '';
-        $signature = $data['Signature'] ?? '';
+        $this->data = $this->parseResponse($response);
+        $this->policy = $this->data['Policy'] ?? '';
+        $this->xAmzMetaScheme = $this->data['x-amz-meta-scheme'] ?? '';
+        $signature = $this->data['Signature'] ?? '';
         if ($isDeEnvironment) {
-            $signature = $data['x-amz-Signature'] ?? '';
-            $this->xAmzDate = $data['x-amz-date'] ?? '';
-            $this->xAmzAlgorithm = $data['x-amz-algorithm'] ?? '';
-            $this->xAmzCredential = $data['x-amz-credential'] ?? '';
+            $signature = $this->data['x-amz-Signature'] ?? '';
+            $this->xAmzSignature = $signature;
+            $this->xAmzDate = $this->data['x-amz-date'] ?? '';
+            $this->xAmzAlgorithm = $this->data['x-amz-algorithm'] ?? '';
+            $this->xAmzCredential = $this->data['x-amz-credential'] ?? '';
         }
         $this->signature = $signature;
-        $this->awsAccessKeyId = $data['AWSAccessKeyId'] ?? '';
-        $this->xAmzMetaAlbumId = $data['x-amz-meta-album_id'] ?? '';
-        $this->acl = $data['acl'] ?? '';
-        $this->xAmzMetaTag = $data['x-amz-meta-tag'] ?? '';
-        $this->xAmzMetaFileName = $data['x-amz-meta-id'] ?? '';
-        $this->xAmzMetaId = $data['x-amz-meta-file_name'] ?? '';
-        $this->url = $data['url'] ?? '';
-        $this->key = $data['key'] ?? '';
+        $this->awsAccessKeyId = $this->data['AWSAccessKeyId'] ?? '';
+        $this->xAmzMetaAlbumId = $this->data['x-amz-meta-album_id'] ?? '';
+        $this->acl = $this->data['acl'] ?? '';
+        $this->xAmzMetaTag = $this->data['x-amz-meta-tag'] ?? '';
+        $this->xAmzMetaFileName = $this->data['x-amz-meta-id'] ?? '';
+        $this->xAmzMetaId = $this->data['x-amz-meta-file_name'] ?? '';
+        $this->url = $this->data['url'] ?? '';
+        $this->key = $this->data['key'] ?? '';
         $this->isDeEnvironment = $isDeEnvironment;
     }
 
@@ -136,5 +139,10 @@ final class GetUploadSettingResponse extends Response
     public function getXAmzCredential(): ?string
     {
         return $this->xAmzCredential;
+    }
+
+    public function getXAmzSignature(): ?string
+    {
+        return $this->xAmzSignature;
     }
 }

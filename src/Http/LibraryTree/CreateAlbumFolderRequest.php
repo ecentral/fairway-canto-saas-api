@@ -29,6 +29,12 @@ final class CreateAlbumFolderRequest extends Request
         $this->type = $type;
     }
 
+    public function setType(string $type): self
+    {
+        $this->type = $type;
+        return $this;
+    }
+
     public function setParentFolder(string $parentFolderId): self
     {
         $this->parentId = $parentFolderId;

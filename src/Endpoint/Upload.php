@@ -38,10 +38,11 @@ final class Upload extends AbstractEndpoint
     /**
      * @throws InvalidResponseException
      * @throws Authorization\NotAuthorizedException
+     * @throws \JsonException
      */
     public function uploadFile(UploadFileRequest $request): EmptyResponse
     {
-        $response = $this->getResponse($request);
+        $response = $this->getMultipartResponse($request);
         return new EmptyResponse($response);
     }
 

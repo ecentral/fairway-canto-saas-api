@@ -26,4 +26,9 @@ final class EmptyResponse extends Response
     {
         return $this->response;
     }
+
+    public function getStatus(): int
+    {
+        return $this->response->getStatusCode();
+    }
 }

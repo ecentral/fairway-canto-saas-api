@@ -15,6 +15,7 @@ use Fairway\CantoSaasApi\Client;
 use Fairway\CantoSaasApi\Endpoint\Authorization\NotAuthorizedException;
 use Fairway\CantoSaasApi\Http\InvalidResponseException;
 use Fairway\CantoSaasApi\Http\RequestInterface as CantoRequestInterface;
+use Fairway\CantoSaasApi\Http\UploadRequest;
 use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -41,25 +42,27 @@ abstract class AbstractEndpoint
      * @throws NotAuthorizedException
      * @throws RuntimeException
      */
-    protected function sendRequest(RequestInterface $request): ResponseInterface
+    protected function sendRequest(RequestInterface $request, array $options = [], bool $withAccessToken = true): ResponseInterface
     {
-        $accessToken = $this->client->getAccessToken();
-        if ($accessToken !== null) {
-            $request = $request->withHeader(
-                'Authorization',
-                'Bearer ' . $accessToken
-            );
-            assert($request instanceof RequestInterface);
+        if ($withAccessToken) {
+            $accessToken = $this->client->getAccessToken();
+            if ($accessToken !== null) {
+                $request = $request->withHeader(
+                    'Authorization',
+                    'Bearer ' . $accessToken
+                );
+                assert($request instanceof RequestInterface);
+            }
         }
 
         try {
-            $response = $this->client->getHttpClient()->send($request);
+            $response = $this->client->getHttpClient()->send($request, $options);
         } catch (RuntimeException $e) {
             /*
              * API seems to respond with 404 when no authentication token is given but needed.
              * When token is given but invalid, API responds with 401.
              */
-            if (($accessToken === null && $e->getCode() === 404) || $e->getCode() === 401) {
+            if ($withAccessToken && (($accessToken === null && $e->getCode() === 404) || $e->getCode() === 401)) {
                 throw new NotAuthorizedException(
                     'Not authorized',
                     1626717511,
@@ -82,13 +85,24 @@ abstract class AbstractEndpoint
     }
 
     /**
+     * @throws InvalidResponseException|NotAuthorizedException|\JsonException
+     */
+    protected function getMultipartResponse(UploadRequest $request): ResponseInterface
+    {
+        $httpRequest = $request->toHttpRequest($this->getClient());
+        return $this->getResponseWithHttpRequest($httpRequest, [
+            'multipart' => $request->getMultipart(),
+        ], false);
+    }
+
+    /**
      * @throws InvalidResponseException
      * @throws NotAuthorizedException
      */
-    protected function getResponseWithHttpRequest(RequestInterface $request): ResponseInterface
+    protected function getResponseWithHttpRequest(RequestInterface $request, array $options = [], bool $withAccessToken = true): ResponseInterface
     {
         try {
-            return $this->sendRequest($request);
+            return $this->sendRequest($request, $options, $withAccessToken);
         } catch (GuzzleException $e) {
             throw new InvalidResponseException(
                 sprintf(
