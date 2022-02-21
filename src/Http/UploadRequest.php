@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace Fairway\CantoSaasApi\Http;
 
 use Fairway\CantoSaasApi\Client;
-use Fairway\CantoSaasApi\Http\Upload\QueryUploadStatusRequest;
 use GuzzleHttp\Psr7\Request as HttpRequest;
 
 abstract class UploadRequest implements RequestInterface
