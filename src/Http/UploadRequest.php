@@ -34,25 +34,38 @@ abstract class UploadRequest implements RequestInterface
         return self::POST;
     }
 
-    public function toHttpRequest(Client $client, array $withHeaders = []): HttpRequest
+    public function getMultipart(): array
     {
         $formData = $this->getFormData();
         if (class_exists(\GuzzleHttp\Psr7\Utils::class) && method_exists(\GuzzleHttp\Psr7\Utils::class, 'tryFopen')) {
-            $formData['contents'] = \GuzzleHttp\Psr7\Utils::tryFopen($this->uploadedFilePath(), 'r');
+            $formData['file'] = \GuzzleHttp\Psr7\Utils::tryFopen($this->uploadedFilePath(), 'r');
         } elseif (function_exists('\GuzzleHttp\Psr7\try_fopen')) {
             // Backward compatibility for guzzlehttp/psr7 < 1.8
-            $formData['contents'] = \GuzzleHttp\Psr7\try_fopen($this->uploadedFilePath(), 'r');
+            $formData['file'] = \GuzzleHttp\Psr7\try_fopen($this->uploadedFilePath(), 'r');
         } else {
             throw new \Exception('Could not open file');
         }
-        $formData['file'] = $formData['contents'];
+        $multipart = [];
+        foreach ($formData as $key => $value) {
+            $data = [
+                'name' => $key,
+                'contents' => $value,
+            ];
+            if ($key === 'file') {
+                $data['filename'] = $formData['x-amz-meta-file_name'];
+            }
+            $multipart[] = $data;
+        }
+        return $multipart;
+    }
+
+    public function toHttpRequest(Client $client, array $withHeaders = []): HttpRequest
+    {
         return new HttpRequest(
             $this->getMethod(),
             $this->getApiPath(),
             $withHeaders,
-            json_encode([
-                'multipart' => [$formData],
-            ], JSON_THROW_ON_ERROR),
+            null,
         );
     }
 }

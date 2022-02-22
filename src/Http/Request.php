@@ -78,6 +78,9 @@ abstract class Request implements RequestInterface, JsonSerializable
     public function toHttpRequest(Client $client, array $withHeaders = []): HttpRequest
     {
         $uri = $this->buildRequestUrl($client);
+        if ($this->hasBody()) {
+            $withHeaders['Content-Type'] = 'application/json';
+        }
         return new HttpRequest(
             $this->getMethod(),
             $uri,

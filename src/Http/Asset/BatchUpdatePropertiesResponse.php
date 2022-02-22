@@ -27,4 +27,9 @@ class BatchUpdatePropertiesResponse implements \Fairway\CantoSaasApi\Http\Respon
     {
         return $this->body;
     }
+
+    public function isSuccessful(): bool
+    {
+        return $this->body === 'success';
+    }
 }

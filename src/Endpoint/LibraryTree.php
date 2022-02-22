@@ -15,6 +15,8 @@ use Fairway\CantoSaasApi\Endpoint\Authorization\NotAuthorizedException;
 use Fairway\CantoSaasApi\Http\InvalidResponseException;
 use Fairway\CantoSaasApi\Http\LibraryTree\CreateAlbumFolderRequest;
 use Fairway\CantoSaasApi\Http\LibraryTree\CreateAlbumFolderResponse;
+use Fairway\CantoSaasApi\Http\LibraryTree\DeleteAlbumFolderResponse;
+use Fairway\CantoSaasApi\Http\LibraryTree\DeleteFolderOrAlbumRequest;
 use Fairway\CantoSaasApi\Http\LibraryTree\GetDetailsRequest;
 use Fairway\CantoSaasApi\Http\LibraryTree\GetDetailsResponse;
 use Fairway\CantoSaasApi\Http\LibraryTree\GetMyCollectionDetailInfoRequest;
@@ -93,11 +95,17 @@ final class LibraryTree extends AbstractEndpoint
      */
     public function createAlbum(CreateAlbumFolderRequest $request): CreateAlbumFolderResponse
     {
+        $request->setType(CreateAlbumFolderRequest::ALBUM);
         $response = $this->getResponse($request);
         return new CreateAlbumFolderResponse($response);
     }
 
-    public function deleteFolderOrAlbum()
+    /**
+     * @throws InvalidResponseException
+     * @throws NotAuthorizedException
+     */
+    public function deleteFolderOrAlbum(DeleteFolderOrAlbumRequest $request): DeleteAlbumFolderResponse
     {
+        return new DeleteAlbumFolderResponse($this->getResponse($request));
     }
 }

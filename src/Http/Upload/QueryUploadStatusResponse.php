@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Fairway\CantoSaasApi\Http\Upload;
 
+use Fairway\CantoSaasApi\DTO\Status;
 use Fairway\CantoSaasApi\Http\InvalidResponseException;
 use Fairway\CantoSaasApi\Http\Response;
 use Psr\Http\Message\ResponseInterface;
@@ -39,6 +40,14 @@ final class QueryUploadStatusResponse extends Response
     public function getResults(): array
     {
         return $this->results;
+    }
+
+    /**
+     * @return array<Status>
+     */
+    public function getStatusItems(): array
+    {
+        return array_map(static fn (array $item) => Status::fromResultItem($item), $this->results);
     }
 
     public function getFound(): int

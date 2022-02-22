@@ -18,7 +18,7 @@ use Fairway\CantoSaasApi\Http\UploadRequest;
  */
 final class UploadFileRequest extends UploadRequest
 {
-    private GetUploadSettingResponse $settings;
+    public GetUploadSettingResponse $settings;
     private string $filePath;
     private ?string $referId;
 
@@ -60,7 +60,7 @@ final class UploadFileRequest extends UploadRequest
 
     public function getMetaId(): string
     {
-        return $this->metaId ?? $this->settings->getXAmzMetaId();
+        return $this->metaId ?? '';
     }
 
     /**
@@ -123,8 +123,8 @@ final class UploadFileRequest extends UploadRequest
     public function getFormData(): array
     {
         $formData = [
-            'name' => $this->settings->getXAmzMetaFileName(),
-            'filename' => $this->settings->getXAmzMetaFileName(),
+            'name' => $this->getFileName(),
+            'filename' => $this->getFileName(),
             'key' => $this->settings->getKey(),
             'acl' => $this->settings->getAcl(),
             'AWSAccessKeyId' => $this->settings->getAwsAccessKeyId(),
@@ -137,11 +137,16 @@ final class UploadFileRequest extends UploadRequest
             'x-amz-meta-file_name' => $this->getFileName(),
         ];
         if ($this->settings->isDeEnvironment()) {
+            unset(
+                $formData['AWSAccessKeyId'],
+                $formData['Signature'],
+                $formData['filename'],
+                $formData['name'],
+            );
             $formData['x-amz-date'] = $this->settings->getXAmzDate();
             $formData['x-amz-algorithm'] = $this->settings->getXAmzAlgorithm();
             $formData['x-amz-credential'] = $this->settings->getXAmzCredential();
-            $formData['x-amz-signature'] = $this->settings->getSignature();
-            unset($formData['Signature']);
+            $formData['x-amz-Signature'] = $this->settings->getXAmzSignature();
         }
         if ($this->referId) {
             $formData['x-amz-meta-refer_id'] = $this->referId;
