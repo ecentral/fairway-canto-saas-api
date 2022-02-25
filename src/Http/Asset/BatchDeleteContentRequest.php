@@ -19,7 +19,7 @@ final class BatchDeleteContentRequest extends Request
 
     public function addContent(string $scheme, string $id): self
     {
-        $this->content[$id] = [
+        $this->content[] = [
             'scheme' => $scheme,
             'id' => $id,
         ];
