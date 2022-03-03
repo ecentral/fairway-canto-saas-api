@@ -123,8 +123,6 @@ final class UploadFileRequest extends UploadRequest
     public function getFormData(): array
     {
         $formData = [
-            'name' => $this->getFileName(),
-            'filename' => $this->getFileName(),
             'key' => $this->settings->getKey(),
             'acl' => $this->settings->getAcl(),
             'AWSAccessKeyId' => $this->settings->getAwsAccessKeyId(),
@@ -140,8 +138,6 @@ final class UploadFileRequest extends UploadRequest
             unset(
                 $formData['AWSAccessKeyId'],
                 $formData['Signature'],
-                $formData['filename'],
-                $formData['name'],
             );
             $formData['x-amz-date'] = $this->settings->getXAmzDate();
             $formData['x-amz-algorithm'] = $this->settings->getXAmzAlgorithm();
