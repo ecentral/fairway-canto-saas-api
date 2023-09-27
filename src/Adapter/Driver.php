@@ -101,14 +101,14 @@ final class Driver implements DriverClient
     public function read(string $identifier): string
     {
         $parsedIdentifier = $this->parseIdentifier($identifier);
-        $download2 = sprintf(
+        $download = sprintf(
             'https://%s.%s/api_binary/v1/%s/%s',
             $this->client->getOptions()->getCantoName(),
             $this->client->getOptions()->getCantoDomain(),
             $parsedIdentifier->getScheme(),
             $parsedIdentifier->getIdentifier()
         );
-        return $this->client->asset()->getAuthorizedUrlContent($download2)->getBody()->getContents();
+        return $this->client->asset()->getAuthorizedUrlContent($download)->getBody()->getContents();
     }
 
     public function listDirectory(string $identifier = null): DirectoryIterator
