@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace Fairway\CantoSaasApi\Adapter\CantoAdapter;
 
-use JetBrains\PhpStorm\ArrayShape;
 
 final class CantoIdentifier
 {
