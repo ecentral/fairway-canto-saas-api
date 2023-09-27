@@ -36,6 +36,7 @@ use Fairway\FairwayFilesystemApi\Permission;
 
 final class Driver implements DriverClient
 {
+    const ALBUM_CONTENT_REQUEST_LIMIT = 100;
     private Client $client;
 
     public function __construct(Client $client, string $userId = '')
@@ -124,7 +125,7 @@ final class Driver implements DriverClient
         }
         $result = [];
         $request = new ListAlbumContentRequest($id->getIdentifier());
-        $request->setLimit(100);
+        $request->setLimit(self::ALBUM_CONTENT_REQUEST_LIMIT);
         $count = 0;
         do {
             $request->setStart($count);
@@ -176,7 +177,7 @@ final class Driver implements DriverClient
     }
 
     /**
-     * After Uploading the file, the returned string is *not* the new identifier, it's the file name.
+     * After uploading the file, the returned string is *not* the new identifier, it's the file name.
      * @see Driver::getUploadStatus() the status of the current upload can be retrieved here.
      */
     public function write(string $identifier, string $parentIdentifier, string $filePath, array $config = []): string
