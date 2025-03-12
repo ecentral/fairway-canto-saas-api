@@ -21,3 +21,4 @@ $allFolders = $client->libraryTree()
                      ->getTree(new GetTreeRequest())
                      ->getResults();
 ```
+
