@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 /*
  * This file is part of the "fairway_api" library by eCentral GmbH.
@@ -10,7 +10,6 @@ declare(strict_types=1);
  */
 
 namespace Fairway\CantoSaasApi\Adapter\CantoAdapter;
-
 
 final class CantoIdentifier
 {

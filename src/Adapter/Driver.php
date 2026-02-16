@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 /*
  * This file is part of the "fairway_api" library by eCentral GmbH.
@@ -321,7 +321,7 @@ final class Driver implements DriverClient
     public function parentOfIdentifier(string $identifier): Directory
     {
         throw new \Exception('Not supported yet');
-//        return new Directory();
+        //        return new Directory();
     }
 
     public function getClient(): Client
