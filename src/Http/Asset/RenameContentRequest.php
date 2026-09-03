@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 /*
  * This file is part of the "fairway_canto_saas_api" library by eCentral GmbH.
@@ -11,7 +11,9 @@ declare(strict_types = 1);
 
 namespace Fairway\CantoSaasApi\Http\Asset;
 
-final class RenameContentRequest extends \Fairway\CantoSaasApi\Http\Request
+use Fairway\CantoSaasApi\Http\Request;
+
+final class RenameContentRequest extends Request
 {
     private string $scheme;
     private string $contentId;

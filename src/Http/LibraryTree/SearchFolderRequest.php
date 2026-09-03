@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 /*
  * This file is part of the "fairway_canto_saas_api" library by eCentral GmbH.
@@ -24,7 +24,7 @@ class SearchFolderRequest extends Request
     public const SORT_BY_SIZE = 'size';
     public const ORIENTATION_LANDSCAPE = 'landscape';
     public const ORIENTATION_PORTRAIT = 'portrait';
-    public const ORIENTATION_SQUARE= 'square';
+    public const ORIENTATION_SQUARE = 'square';
 
     protected string $folderId;
 

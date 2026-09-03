@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 /*
  * This file is part of the "fairway_canto_saas_api" library by eCentral GmbH.
@@ -17,6 +17,7 @@ use Fairway\CantoSaasApi\Http\InvalidResponseException;
 use Fairway\CantoSaasApi\Http\RequestInterface as CantoRequestInterface;
 use Fairway\CantoSaasApi\Http\UploadRequest;
 use GuzzleHttp\Exception\GuzzleException;
+use JsonException;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
@@ -85,7 +86,7 @@ abstract class AbstractEndpoint
     }
 
     /**
-     * @throws InvalidResponseException|NotAuthorizedException|\JsonException
+     * @throws InvalidResponseException|NotAuthorizedException|JsonException
      */
     protected function getMultipartResponse(UploadRequest $request): ResponseInterface
     {

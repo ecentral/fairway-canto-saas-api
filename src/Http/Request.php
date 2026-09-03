@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 /*
  * This file is part of the "fairway_canto_saas_api" library by eCentral GmbH.
@@ -11,6 +11,7 @@ declare(strict_types = 1);
 
 namespace Fairway\CantoSaasApi\Http;
 
+use Exception;
 use Fairway\CantoSaasApi\Client;
 use GuzzleHttp\Psr7\Request as HttpRequest;
 use GuzzleHttp\Psr7\Uri;
@@ -31,7 +32,7 @@ abstract class Request implements RequestInterface, JsonSerializable
 
     public function jsonSerialize(): array
     {
-        throw new \Exception('Serializing object not implemented.');
+        throw new Exception('Serializing object not implemented.');
     }
 
     protected function hasBody(): bool

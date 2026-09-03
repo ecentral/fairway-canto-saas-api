@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 /*
  * This file is part of the "fairway_canto_saas_api" library by eCentral GmbH.
@@ -12,6 +12,7 @@ declare(strict_types = 1);
 namespace Fairway\CantoSaasApi\Http;
 
 use function json_decode;
+
 use JsonException;
 
 use Psr\Http\Message\ResponseInterface as PsrResponseInterface;
