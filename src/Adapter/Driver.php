@@ -112,7 +112,7 @@ final class Driver implements DriverClient
         return $this->client->asset()->getAuthorizedUrlContent($download)->getBody()->getContents();
     }
 
-    public function listDirectory(string $identifier = null): DirectoryIterator
+    public function listDirectory(?string $identifier = null): DirectoryIterator
     {
         if ($identifier === null) {
             throw new NotImplementedException('The root folder needs to be implemented');
