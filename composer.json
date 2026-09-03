@@ -67,6 +67,12 @@
       "Fairway\\CantoSaasApi\\Tests\\": "tests"
     }
   },
+  "config": {
+    "allow-plugins": {
+      "typo3/class-alias-loader": true,
+      "typo3/cms-composer-installers": true
+    }
+  },
   "scripts": {
     "cs:check": "php-cs-fixer fix --dry-run --diff --using-cache=no --config=.php-cs-fixer.dist.php",
     "cs:fix": "php-cs-fixer fix --diff --using-cache=no --config=.php-cs-fixer.dist.php",
