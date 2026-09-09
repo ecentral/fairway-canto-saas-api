@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 /*
  * This file is part of the "fairway_canto_saas_api" library by eCentral GmbH.
@@ -11,8 +11,13 @@ declare(strict_types = 1);
 
 namespace Fairway\CantoSaasApi\Http;
 
+use Exception;
 use Fairway\CantoSaasApi\Client;
 use GuzzleHttp\Psr7\Request as HttpRequest;
+
+use function GuzzleHttp\Psr7\try_fopen;
+
+use GuzzleHttp\Psr7\Utils;
 
 abstract class UploadRequest implements RequestInterface
 {
@@ -37,13 +42,13 @@ abstract class UploadRequest implements RequestInterface
     public function getMultipart(): array
     {
         $formData = $this->getFormData();
-        if (class_exists(\GuzzleHttp\Psr7\Utils::class) && method_exists(\GuzzleHttp\Psr7\Utils::class, 'tryFopen')) {
-            $formData['file'] = \GuzzleHttp\Psr7\Utils::tryFopen($this->uploadedFilePath(), 'r');
+        if (class_exists(Utils::class) && method_exists(Utils::class, 'tryFopen')) {
+            $formData['file'] = Utils::tryFopen($this->uploadedFilePath(), 'r');
         } elseif (function_exists('\GuzzleHttp\Psr7\try_fopen')) {
             // Backward compatibility for guzzlehttp/psr7 < 1.8
-            $formData['file'] = \GuzzleHttp\Psr7\try_fopen($this->uploadedFilePath(), 'r');
+            $formData['file'] = try_fopen($this->uploadedFilePath(), 'r');
         } else {
-            throw new \Exception('Could not open file');
+            throw new Exception('Could not open file');
         }
         $multipart = [];
         foreach ($formData as $key => $value) {

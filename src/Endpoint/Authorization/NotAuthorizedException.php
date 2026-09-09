@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 /*
  * This file is part of the "fairway_canto_saas_api" library by eCentral GmbH.
@@ -19,7 +19,7 @@ final class NotAuthorizedException extends Exception
 {
     protected ?ResponseInterface $response;
 
-    public function __construct($message = '', $code = 0, Throwable $previous = null, ?ResponseInterface $response = null)
+    public function __construct($message = '', $code = 0, ?Throwable $previous = null, ?ResponseInterface $response = null)
     {
         parent::__construct($message, $code, $previous);
         $this->response = $response;

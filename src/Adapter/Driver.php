@@ -1,9 +1,9 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 /*
- * This file is part of the "fairway_api" library by eCentral GmbH.
+ * This file is part of the "fairway_canto_saas_api" library by eCentral GmbH.
  *
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
@@ -36,7 +36,7 @@ use Fairway\FairwayFilesystemApi\Permission;
 
 final class Driver implements DriverClient
 {
-    const ALBUM_CONTENT_REQUEST_LIMIT = 100;
+    public const ALBUM_CONTENT_REQUEST_LIMIT = 100;
     private Client $client;
 
     public function __construct(Client $client, string $userId = '')
@@ -66,7 +66,7 @@ final class Driver implements DriverClient
     {
         if ($this->getType($identifier) === FileType::DIRECTORY) {
             // todo: Exception type needs to be defined
-            throw new \Exception('Not supported');
+            throw new Exception('Not supported');
         }
         $parsedIdentifier = $this->parseIdentifier($identifier);
         return $this->client->asset()->getContentDetails(
@@ -112,7 +112,7 @@ final class Driver implements DriverClient
         return $this->client->asset()->getAuthorizedUrlContent($download)->getBody()->getContents();
     }
 
-    public function listDirectory(string $identifier = null): DirectoryIterator
+    public function listDirectory(?string $identifier = null): DirectoryIterator
     {
         if ($identifier === null) {
             throw new NotImplementedException('The root folder needs to be implemented');
@@ -320,7 +320,7 @@ final class Driver implements DriverClient
 
     public function parentOfIdentifier(string $identifier): Directory
     {
-        throw new \Exception('Not supported yet');
+        throw new Exception('Not supported yet');
         //        return new Directory();
     }
 
@@ -331,11 +331,11 @@ final class Driver implements DriverClient
 
     public function getDriver(): DriverClient
     {
-        throw new \Exception('Not supported yet');
+        throw new Exception('Not supported yet');
     }
 
     public function getPublicUrl(string $identifier): string
     {
-        throw new \Exception('Not supported yet');
+        throw new Exception('Not supported yet');
     }
 }

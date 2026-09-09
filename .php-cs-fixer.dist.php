@@ -8,7 +8,13 @@ EOF;
 
 $config = new PhpCsFixer\Config();
 $config->setRiskyAllowed(true);
-$config->getFinder()->in(__DIR__);
+$config->getFinder()
+    ->in(__DIR__)
+    ->exclude([
+        '.Build',
+        'var',
+        'vendor',
+    ]);
 $config->setRules([
     '@DoctrineAnnotation' => true,
     '@PSR12' => true,

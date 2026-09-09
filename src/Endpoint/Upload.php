@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 /*
  * This file is part of the "fairway_canto_saas_api" library by eCentral GmbH.
@@ -18,6 +18,7 @@ use Fairway\CantoSaasApi\Http\Upload\GetUploadSettingResponse;
 use Fairway\CantoSaasApi\Http\Upload\QueryUploadStatusRequest;
 use Fairway\CantoSaasApi\Http\Upload\QueryUploadStatusResponse;
 use Fairway\CantoSaasApi\Http\Upload\UploadFileRequest;
+use JsonException;
 
 final class Upload extends AbstractEndpoint
 {
@@ -38,7 +39,7 @@ final class Upload extends AbstractEndpoint
     /**
      * @throws InvalidResponseException
      * @throws Authorization\NotAuthorizedException
-     * @throws \JsonException
+     * @throws JsonException
      */
     public function uploadFile(UploadFileRequest $request): EmptyResponse
     {

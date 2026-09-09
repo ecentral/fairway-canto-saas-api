@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 /*
  * This file is part of the "fairway_canto_saas_api" library by eCentral GmbH.
@@ -28,7 +28,7 @@ final class UploadFileRequest extends UploadRequest
     private ?string $tag = null;
     private ?string $albumId = null;
 
-    public function __construct(string $filePath, GetUploadSettingResponse $settings, string $referId = null)
+    public function __construct(string $filePath, GetUploadSettingResponse $settings, ?string $referId = null)
     {
         $this->filePath = $filePath;
         $this->settings = $settings;

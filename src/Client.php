@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 /*
  * This file is part of the "fairway_canto_saas_api" library by eCentral GmbH.
@@ -12,6 +12,8 @@ declare(strict_types = 1);
 namespace Fairway\CantoSaasApi;
 
 use Fairway\CantoSaasApi\Endpoint\Asset;
+use Fairway\CantoSaasApi\Endpoint\Authorization\AuthorizationFailedException;
+use Fairway\CantoSaasApi\Endpoint\Authorization\NotAuthorizedException;
 use Fairway\CantoSaasApi\Endpoint\Authorization\OAuth2;
 use Fairway\CantoSaasApi\Endpoint\LibraryTree;
 use Fairway\CantoSaasApi\Endpoint\Upload;
@@ -71,7 +73,7 @@ class Client
     }
 
     /**
-     * @throws Endpoint\Authorization\AuthorizationFailedException|Endpoint\Authorization\NotAuthorizedException
+     * @throws AuthorizationFailedException|NotAuthorizedException
      */
     public function authorizeWithClientCredentials(string $userId = '', string $scope = OAuth2Request::SCOPE_ADMIN): OAuth2Response
     {
@@ -111,7 +113,7 @@ class Client
         return new MdcUrlHelper($this);
     }
 
-    public function getApiUrl(string $path = null): string
+    public function getApiUrl(?string $path = null): string
     {
         $url = sprintf(
             self::API_ROUTE,
